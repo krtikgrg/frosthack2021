@@ -9,6 +9,11 @@ const Events = require("../../models/Events");
 
 router.post("/addEvent", async (req, res) => {
 
+    var errors = {}
+    if(req.body.name === "" || req.body.name == null){
+        errors.eventname = "Name must be provided"
+         return res.status(400).json(errors)
+    }
 
     await currentEvent.findOne({ email: req.body.email }).then(async result => {
         res.json(result)
