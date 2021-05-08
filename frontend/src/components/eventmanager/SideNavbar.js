@@ -11,6 +11,7 @@ class SideNavbar extends Component {
     }
     onClickFaltu = e =>{
         e.preventDefault()
+        // #e2dccd
     }
 //     "Event Manager": "u",
 //   "Venue Provider": "v",
