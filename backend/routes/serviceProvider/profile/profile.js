@@ -21,7 +21,7 @@ router.post("/get",(req,res)=>{
     console.log(req.body);
     User.find({_id: req.body.id}).then(user => {
         res.json(user);
-        console.log(res);
+        // console.log(res);
     });
 });
 
