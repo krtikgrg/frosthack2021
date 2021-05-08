@@ -132,6 +132,14 @@ router.post("/reset", async (req, res) => {
     });
 
 })
+router.post("/all", async (req, res) => {
 
+
+    await currentEvent.findOne({ email: req.body.email }).then(async result => {
+        res.json(result)
+
+    });
+
+})
 
 module.exports = router;
