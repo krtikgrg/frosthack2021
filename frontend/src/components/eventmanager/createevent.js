@@ -73,8 +73,17 @@ class createEvent extends Component {
             window.location.reload(false);    
         })
     }
-    onClickCreate = e => {
+    onClickCreate = async e => {
         e.preventDefault();
+        const info = {
+            email: this.props.auth.user.email,
+            name: this.state.eventname
+        }
+        await axios.post("/eventManager/event/addEvent", info).then(async res =>{
+            this.props.history.push("/emdashboard")    
+        }).catch(async err =>
+            await this.setState({errors:err.response.data})
+        );
     }
     faltu = e => {
         e.preventDefault();
