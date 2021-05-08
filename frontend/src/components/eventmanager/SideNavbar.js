@@ -55,6 +55,21 @@ class SideNavbar extends Component {
                     </Link>
                 </li>
                 <li style={{marginTop:"5%"}}>
+                    <Link to="/resetselections" style={{ width:"100%", borderRadius: "3px", letterSpacing: "1.5px"}}className="btn btn-large waves-effect waves-light hoverable black accent-3">
+                        <i className="zmdi zmdi-view-dashboard"></i> Reset
+                    </Link>
+                </li>
+                <li style={{marginTop:"5%"}}>
+                    <Link to="/createevent" style={{ width:"100%", borderRadius: "3px", letterSpacing: "1.5px"}}className="btn btn-large waves-effect waves-light hoverable black accent-3">
+                        <i className="zmdi zmdi-view-dashboard"></i> Create Event
+                    </Link>
+                </li>
+                <li style={{marginTop:"5%"}}>
+                    <Link to="/viewallevents" style={{ width:"100%", borderRadius: "3px", letterSpacing: "1.5px"}}className="btn btn-large waves-effect waves-light hoverable black accent-3">
+                        <i className="zmdi zmdi-view-dashboard"></i> View All Events
+                    </Link>
+                </li>
+                <li style={{marginTop:"5%"}}>
                     <Link to="/" onClick={this.onClick} style={{ width:"100%", borderRadius: "3px", letterSpacing: "1.5px"}}className="btn btn-large waves-effect waves-light hoverable black accent-3">
                         <i className="zmdi zmdi-view-dashboard"></i> Logout
                     </Link>

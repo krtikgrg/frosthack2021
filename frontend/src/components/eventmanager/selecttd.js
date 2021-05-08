@@ -8,11 +8,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import classnames from "classnames";
 
-class selectvp extends Component {
+class selecttd extends Component {
     constructor() {
         super();
         this.state = {
-            vp : []
+            td : []
         };
     }
     onLogoutClick = e => {
@@ -22,21 +22,21 @@ class selectvp extends Component {
     
     async componentDidMount() {
         const info = {
-            type:"v",
+            type:"t",
             email: this.props.auth.user.email
         }
         await axios.post("/eventManager/getProvider", info).then(async res => {
             var lvp = res.data;
             await axios.post("/eventManager/addProvider/all",info).then(async res => {
                     for(var i=0;i<lvp.length;i++){
-                        if(res.data.vselected == 1 && lvp[i]._id == res.data.vid){
+                        if(res.data.tselected == 1 && lvp[i]._id == res.data.tid){
                             lvp[i].hired = 1
                         }
                         else{
                             lvp[i].hired = 0
                         }
                     }
-                this.setState({vp:lvp});
+                this.setState({td:lvp});
                 // console.log(this.state.vp);
                 // phonenum, email, description
             })
@@ -44,12 +44,12 @@ class selectvp extends Component {
     }
     async onClick(e,index){
         e.preventDefault();
-        var VP = this.state.vp;
+        var VP = this.state.td;
         const info = {
             id: VP[index]._id,
             email: this.props.auth.user.email
         }
-        await axios.post("/eventManager/addProvider/v", info).then(async res => {
+        await axios.post("/eventManager/addProvider/t", info).then(async res => {
             window.location.reload(false);
         })
     }
@@ -57,14 +57,14 @@ class selectvp extends Component {
         e.preventDefault();
     }
     render() {
-        const venuep = this.state.vp;
+        const venuep = this.state.td;
         return (
             <div style={{ display: "flex", flexDirection: "row" }}>
                 <div style={{ width: "16%", padding: "0" }}>
                     <SideNavbar></SideNavbar>
                 </div>
                 <div style={{ width: "84%" }}>
-                    <h3 className="center title" style={{marginBottom:"50px"}}>Lets Hire a Venue Provider for your next event!</h3>
+                    <h3 className="center title" style={{marginBottom:"50px"}}>Lets Hire a decorator and Tent provider for your next event!</h3>
                     {venuep.map((venpro,index) => (
                         <div className="card" style={{ width: "80%", marginLeft: "10%", marginRight: "10%", paddingLeft: "10%", paddingRight: "10%" }}>
                         <div className="card-body">
@@ -96,7 +96,7 @@ class selectvp extends Component {
         );
     }
 }
-selectvp.propTypes = {
+selecttd.propTypes = {
     logoutUser: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired
 };
@@ -106,4 +106,4 @@ const mapStateToProps = state => ({
 export default connect(
     mapStateToProps,
     { logoutUser }
-)(selectvp);
+)(selecttd);
