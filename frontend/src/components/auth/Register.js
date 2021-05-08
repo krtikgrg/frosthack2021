@@ -25,7 +25,7 @@ class Register extends Component {
       password2: "",
       type: "u",
       description: "",
-      price: 0,
+      price: "",
       errors: {}
     };
   }
@@ -59,8 +59,8 @@ class Register extends Component {
       description: this.state.description,
       price: this.state.price
     };
-    console.log(newUser);
-    // this.props.registerUser(newUser, this.props.history);
+    // console.log(newUser);
+    this.props.registerUser(newUser, this.props.history);
   };
   render() {
     const { errors } = this.state;
@@ -70,7 +70,7 @@ class Register extends Component {
     const curtype = this.state.type;
     return (
       <div className="container">
-        <div className="row">
+        <div className="column" style={{marginRight:"20%",marginLeft:"20%",width:"60%"}}>
           <div className="col s8 offset-s2">
             <Link to="/" className="btn-flat waves-effect">
               <i className="material-icons left">keyboard_backspace</i> Back to
@@ -85,7 +85,7 @@ class Register extends Component {
               </p>
             </div>
             <form noValidate onSubmit={this.onSubmit}>
-              <div className="input-field col s12">
+              <div className="input-field col s12" style={{marginTop:"5px",marginBottom:"5px"}}>
                 <input
                   onChange={this.onChange}
                   value={this.state.name}
@@ -99,7 +99,7 @@ class Register extends Component {
                 <label htmlFor="name">Name</label>
                 <span className="red-text">{errors.name}</span>
               </div>
-              <div className="input-field col s12">
+              <div className="input-field col s12" style={{marginTop:"5px",marginBottom:"5px"}}>
                 <input
                   onChange={this.onChange}
                   value={this.state.email}
@@ -113,51 +113,7 @@ class Register extends Component {
                 <label htmlFor="email">Email</label>
                 <span className="red-text">{errors.email}</span>
               </div>
-              <div className="dropdown-menu">
-                <Dropdown options={types} onChange={this.onselectType} placeholder="Select Your Type" />
-              </div>
-              {
-                (curtype != 'u')
-                  ?
-                  (
-                    <div>
-                      <div className="input-field col s12">
-                        <input
-                          onChange={this.onChange}
-                          value={this.state.price}
-                          error={errors.price}
-                          id="price"
-                          type="Number"
-                          className={classnames("", {
-                            invalid: errors.price
-                          })}
-                        />
-                        <label htmlFor="price">Average Price for per 100 people</label>
-                        <span className="red-text">{errors.price}</span>
-                      </div>
-                      <div className="input-field col s12">
-                        <input
-                          onChange={this.onChange}
-                          value={this.state.description}
-                          error={errors.description}
-                          id="description"
-                          type="text"
-                          className={classnames("", {
-                            invalid: errors.description
-                          })}
-                        />
-                        <label htmlFor="description">Provide Description</label>
-                        <span className="red-text">{errors.description}</span>
-                      </div>
-                    </div>
-                  )
-                  :
-                  (
-                    <div>
-
-                    </div>
-                  )
-              }
+              
               <div className="input-field col s12">
                 <input
                   onChange={this.onChange}
@@ -186,6 +142,52 @@ class Register extends Component {
                 <label htmlFor="password2">Confirm Password</label>
                 <span className="red-text">{errors.password2}</span>
               </div>
+              <div className="dropdown-menu" style={{height:"10%",marginTop:"5px",marginBottom:"5px",borderStyle:"solid",borderRadius:"5px",borderColor:"#AAAAAA"}}>
+                <Dropdown options={types} id = "type"onChange={this.onselectType} placeholder="Select Your Type" />
+              </div>
+              {
+                (curtype !== 'u')
+                  ?
+                  (
+                    <div>
+                      <div className="input-field col s12">
+                        <input
+                          onChange={this.onChange}
+                          value={this.state.price}
+                          error={errors.price}
+                          id="price"
+                          type="Number"
+                          className={classnames("", {
+                            invalid: errors.price
+                          })}
+                        />
+                        <label htmlFor="price">Average Price for per 100 people</label>
+                        <span className="red-text">{errors.price}</span>
+                      </div>
+                      <div className="input-field col s12">
+                        <textarea
+                          onChange={this.onChange}
+                          value={this.state.description}
+                          error={errors.description}
+                          id="description"
+                          placeholder="Enter Your Description"
+                          rows={4}
+                          cols={12}
+                          className={classnames("", {
+                            invalid: errors.description
+                          })}
+                        />
+                        <span className="red-text">{errors.description}</span>
+                      </div>
+                    </div>
+                  )
+                  :
+                  (
+                    <div>
+
+                    </div>
+                  )
+              }
               <div className="col s12" style={{ paddingLeft: "11.250px" }}>
                 <button
                   style={{
