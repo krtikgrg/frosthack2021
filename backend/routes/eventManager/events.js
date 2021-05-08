@@ -14,6 +14,7 @@ router.post("/addEvent", async (req, res) => {
         res.json(result)
 
         const Event = new Events({ email: req.body.email,
+            name: req.body.name,
             vid: result.vid,
             vname: result.vname,
             vphone: result.vphone,
