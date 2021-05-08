@@ -19,12 +19,18 @@ class Login extends Component {
       if(this.props.auth.user.type !== 'u'){
         this.props.history.push("/spdashboard"); // push user to dashboard when they login
       }
+      else{
+        this.props.history.push("/emdashboard");
+      }
     }
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.auth.isAuthenticated) {
       if(nextProps.auth.user.type !== 'u'){
         this.props.history.push("/spdashboard"); // push user to dashboard when they login
+      }
+      else{
+        this.props.history.push("/emdashboard");
       }
     }
     if (nextProps.errors) {

@@ -14,6 +14,7 @@ import Dashboard from "./components/dashboard/Dashboard";
 import editProfile from "./components/serviceproviders/editprofile";
 import Profile from "./components/serviceproviders/profile";
 import SpDashboard from "./components/serviceproviders/dashboard";
+import EmDashboard from "./components/eventmanager/dashboard";
 
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
@@ -48,6 +49,7 @@ class App extends Component {
               <PrivateRoute exact path="/spdashboard" component={SpDashboard} />
               <PrivateRoute exact path="/editprofile" component={editProfile} />
               <PrivateRoute exact path="/profile" component={Profile} />
+              <PrivateRoute exact path="/emdashboard" component={EmDashboard} />
             </Switch>
           </div>
         </Router>

@@ -47,7 +47,7 @@ class Dashboard extends Component {
                                 <button onClick={this.sendToEditProfile} style={{width:"30%",marginLeft:"2.5%", backgroundColor:"#00FF00", borderStyle:"solid",borderRadius:"10px",height:"20%"}}>
                                     <h4 style={{paddingTop:"20%",paddingBottom:"20%"}}>Edit Profile</h4>
                                 </button>
-                                <button onClick={this.onLogoutClick} style={{width:"30%",marginLeft:"2.5%",marginRight:"2.5%", backgroundColor:"#0000FF", borderStyle:"solid",borderRadius:"10px",height:"20%"}}>
+                                <button onClick={this.onLogoutClick} style={{width:"30%",marginLeft:"2.5%",marginRight:"2.5%", backgroundColor:"#87CEEB", borderStyle:"solid",borderRadius:"10px",height:"20%"}}>
                                     <h4 style={{paddingTop:"20%",paddingBottom:"20%"}}>Logout</h4>
                                 </button>
                             </div>
