@@ -20,24 +20,32 @@ class selectvp extends Component {
         this.props.logoutUser();
     };
     
-    componentDidMount() {
+    async componentDidMount() {
         const info = {
-            type:"v"
+            type:"v",
+            email: this.props.auth.user.email
         }
-        axios.post("/eventManager/getProvider", info).then(res => {
-            
+        await axios.post("/eventManager/getProvider", info).then(async res => {
+            var lvp = res.data;
+            await axios.post("/eventManager/getProvider/all",info).then(async res => {
+                if(res.data.vselected == 1){
+                    for(var i=0;i<lvp.length;i++){
+                        if(lvp[i]._id == res.data.vid){
+                            lvp[i].hired = 1
+                        }
+                        else{
+                            lvp[i].hired = 0
+                        }
+                    }
+                }
+                this.setState({vp:lvp});
+                console.log(this.state.vp);
+            })
         })
     }
-    onSubmit = async e => {
+    onClick(e,index){
         e.preventDefault();
-        const newUser = this.state;
-        await axios
-            .post("/serviceProvider/profile/edit", newUser)
-            .then(async res => this.props.history.push("/spdashboard")) // re-direct to login on successful register
-      .catch(async err =>
-        await this.setState({errors:err.response.data})
-      );
-      };
+    }
     render() {
         const { user } = this.props.auth;
         const {errors} = this.state;

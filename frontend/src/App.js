@@ -15,7 +15,7 @@ import editProfile from "./components/serviceproviders/editprofile";
 import Profile from "./components/serviceproviders/profile";
 import SpDashboard from "./components/serviceproviders/dashboard";
 import EmDashboard from "./components/eventmanager/dashboard";
-
+import SelectVP from "./components/eventmanager/selectvp";
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
   // Set auth token header auth
@@ -50,6 +50,7 @@ class App extends Component {
               <PrivateRoute exact path="/editprofile" component={editProfile} />
               <PrivateRoute exact path="/profile" component={Profile} />
               <PrivateRoute exact path="/emdashboard" component={EmDashboard} />
+              <PrivateRoute exact path="/selectvenueprovider" component={SelectVP} />
             </Switch>
           </div>
         </Router>
