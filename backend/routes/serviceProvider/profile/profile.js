@@ -74,7 +74,7 @@ router.post("/edit",(req,res)=>{
     const {errors,isValid} = validateEditInput(req.body);
     if(!isValid)
         return res.status(400).json(errors);
-    User.updateOne({_id:req.body.id},{$set:{name: req.body.name , price: req.body.price , description: req.body.description }}).then(user =>{        
+    User.updateOne({_id:req.body.id},{$set:{name: req.body.name , price: req.body.price , description: req.body.description , phone : req.body.phone}}).then(user =>{        
             if (user){
                 res.json("Update Successful");
             }           

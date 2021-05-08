@@ -8,6 +8,7 @@ module.exports = function validateRegisterInput(data){
     data.password = !isEmpty(data.password) ? data.password: "";
     data.password2 = !isEmpty(data.password2) ? data.password2: "";
     data.type = !isEmpty(data.type) ? data.type: "";
+    data.phone = !isEmpty(data.phone) ? data.phone: "";
     data.description = !isEmpty(data.description) ? data.description: "";
     data.price = !isEmpty(data.price) ? data.price: "";
 
@@ -34,7 +35,10 @@ module.exports = function validateRegisterInput(data){
     if(!validator.equals(data.password,data.password2)){
         errors.password2 = "Passwords do not match";
     }
-
+    if(!validator.isLength(data.phone,{min:10 , max: 10})){
+        errors.phone = "phone should be 10 digits long";
+    }
+    
     if( data.type !== "u"){
         if(validator.isEmpty(data.description)){
             errors.description = "Description is required";
