@@ -22,6 +22,7 @@ import SelectPG from "./components/eventmanager/selectpg";
 import SelectDJ from "./components/eventmanager/selectdj";
 import Reset from "./components/eventmanager/reset";
 import CreateEvent from "./components/eventmanager/createevent";
+import ViewAllEvents from "./components/eventmanager/viewallevents";
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
   // Set auth token header auth
@@ -63,6 +64,7 @@ class App extends Component {
               <PrivateRoute exact path="/selectdj" component={SelectDJ} />
               <PrivateRoute exact path="/resetselections" component={Reset} />
               <PrivateRoute exact path="/createevent" component={CreateEvent} />
+              <PrivateRoute exact path="/viewallevents" component={ViewAllEvents} />
             </Switch>
           </div>
         </Router>

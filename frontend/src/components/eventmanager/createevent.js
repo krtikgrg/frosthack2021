@@ -80,7 +80,10 @@ class createEvent extends Component {
             name: this.state.eventname
         }
         await axios.post("/eventManager/event/addEvent", info).then(async res =>{
-            this.props.history.push("/emdashboard")    
+            await axios.post("/eventManager/addProvider/reset", info).then(res =>{
+                this.props.history.push("/viewallevents")   
+            })
+            
         }).catch(async err =>
             await this.setState({errors:err.response.data})
         );
