@@ -5,6 +5,7 @@ import { logoutUser } from "../../actions/authActions";
 import SideNavbar from "./SideNavbar";
 import { faUser, faCar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link,withRouter } from "react-router-dom";
 import axios from "axios";
 import classnames from "classnames";
 
@@ -86,13 +87,18 @@ class createEvent extends Component {
                     <SideNavbar></SideNavbar>
                 </div>
                 <div style={{ width: "84%" }}>
+                    <h3 className="title red-text" style={{marginLeft:"30%"}}>Lets Create an Event!</h3>
                     {
                         (
                             this.state.done == 1
                         ) ? (
                                 <div className="card" style={{ width: "80%", marginLeft: "10%", marginRight: "10%", paddingLeft: "10%", paddingRight: "10%" }}>
                                     <div className="card-body" style={{ display: "flex", flexDirection: "column" }}>
-                                        <div className="card-title center" style={{ display: "flex", flexDirection: "row" }}>
+                                        <div className="card-title" style={{ display: "flex", flexDirection: "row" }}>
+                                            <label htmlFor="eventname">Event Name</label>
+                                            <span className="red-text">
+                                                {errors.eventname}
+                                            </span>
                                             <input
                                                 onChange={this.onChangeName}
                                                 value={this.state.eventname}
@@ -103,12 +109,13 @@ class createEvent extends Component {
                                                     invalid: errors.eventname
                                                 })}
                                             />
-                                            <label htmlFor="eventname">Event Name</label>
-                                            <span className="red-text">
-                                                {errors.eventname}
-                                            </span>
+                                            
                                         </div>
                                         <div className="card-subtitle mb-2 text-muted" style={{ display: "flex", flexDirection: "row", marginLeft: "12%" }}>
+                                        <label htmlFor="expectedpeople">Expected invitations to be sent</label>
+                                            <span className="red-text">
+                                                {errors.expectedpeople}
+                                            </span>
                                             <input
                                                 onChange={this.onChangePeople}
                                                 value={this.state.expectedpeople}
@@ -119,39 +126,36 @@ class createEvent extends Component {
                                                     invalid: errors.expectedpeople
                                                 })}
                                             />
-                                            <label htmlFor="expectedpeople">Expected invitations to be sent</label>
-                                            <span className="red-text">
-                                                {errors.expectedpeople}
-                                            </span>
+                                            
                                         </div>
                                         <h6>Venue Details</h6>
                                         <div style={{ display: "flex", flexDirection: "row" }}>
                                             <div style={{ marginLeft: "4%", width: "30%" }}>Contact Number: {this.state.even.vphone}</div>
-                                            <div style={{ marginLeft: "3%", width: "30%" }}>Email: {this.state.even.vemail}</div>
+                                            <div style={{ marginLeft: "3%", width: "30%" }}>Name: {this.state.even.vname}</div>
                                             <div style={{ marginLeft: "3%", width: "30%" }}>Price: {this.state.even.vprice}</div>
                                         </div>
                                         <h6>Caterer Details</h6>
                                         <div style={{ display: "flex", flexDirection: "row" }}>
                                             <div style={{ marginLeft: "4%", width: "30%" }}>Contact Number: {this.state.even.cphone}</div>
-                                            <div style={{ marginLeft: "3%", width: "30%" }}>Email: {this.state.even.cemail}</div>
+                                            <div style={{ marginLeft: "3%", width: "30%" }}>Name: {this.state.even.cname}</div>
                                             <div style={{ marginLeft: "3%", width: "30%" }}>Price: {this.state.even.cprice}</div>
                                         </div>
                                         <h6>Tent and Decor Details</h6>
                                         <div style={{ display: "flex", flexDirection: "row" }}>
                                             <div style={{ marginLeft: "4%", width: "30%" }}>Contact Number: {this.state.even.tphone}</div>
-                                            <div style={{ marginLeft: "3%", width: "30%" }}>Email: {this.state.even.temail}</div>
+                                            <div style={{ marginLeft: "3%", width: "30%" }}>Name: {this.state.even.tname}</div>
                                             <div style={{ marginLeft: "3%", width: "30%" }}>Price: {this.state.even.tprice}</div>
                                         </div>
                                         <h6>Photographer Details</h6>
                                         <div style={{ display: "flex", flexDirection: "row" }}>
                                             <div style={{ marginLeft: "4%", width: "30%" }}>Contact Number: {this.state.even.pphone}</div>
-                                            <div style={{ marginLeft: "3%", width: "30%" }}>Email: {this.state.even.pemail}</div>
+                                            <div style={{ marginLeft: "3%", width: "30%" }}>Name: {this.state.even.pname}</div>
                                             <div style={{ marginLeft: "3%", width: "30%" }}>Price: {this.state.even.pprice}</div>
                                         </div>
                                         <h6>DJ Details</h6>
                                         <div style={{ display: "flex", flexDirection: "row" }}>
                                             <div style={{ marginLeft: "4%", width: "30%" }}>Contact Number: {this.state.even.dphone}</div>
-                                            <div style={{ marginLeft: "3%", width: "30%" }}>Email: {this.state.even.demail}</div>
+                                            <div style={{ marginLeft: "3%", width: "30%" }}>Name: {this.state.even.dname}</div>
                                             <div style={{ marginLeft: "3%", width: "30%" }}>Price: {this.state.even.dprice}</div>
                                         </div>
                                         <h6 className="card-subtitle mb-2 text-muted">Expected Bill: {this.state.expectedbill}</h6>
@@ -166,14 +170,14 @@ class createEvent extends Component {
                                     </div>
                                 </div>
                             ) : (
-                                <div>
+                                <div style={{marginLeft:"10%"}}>
                                 {
                                     (
                                         this.state.even.vselected == 0
                                     )?(
                                         <div style={{display:"flex", flexDirection:"row"}}>
-                                            <h6>Please Select a Venue Provider @</h6>
-                                            <Link classnames="btn waves-effect waves-light hoverable green accent-3" to="/selectvenueprovider" style={{ width:"100%", borderRadius: "3px", letterSpacing: "1.5px"}}className="btn btn-large waves-effect waves-light hoverable black accent-3">
+                                            <h5 style={{width:"50%"}}>Please Select a Venue Provider</h5>
+                                            <Link classnames="btn waves-effect waves-light hoverable green accent-3" to="/selectvenueprovider" style={{ width:"15%", borderRadius: "3px", letterSpacing: "1.5px"}}className="btn btn-small waves-effect waves-light hoverable blue accent-3">
                                                 <i className="zmdi zmdi-view-dashboard"></i> Venue Providers
                                             </Link>
                                         </div>
@@ -186,8 +190,8 @@ class createEvent extends Component {
                                         this.state.even.cselected == 0
                                     )?(
                                         <div style={{display:"flex", flexDirection:"row"}}>
-                                            <h6>Please Select a Catering Service @</h6>
-                                            <Link classnames="btn waves-effect waves-light hoverable green accent-3" to="/selectcateringservice" style={{ width:"100%", borderRadius: "3px", letterSpacing: "1.5px"}}className="btn btn-large waves-effect waves-light hoverable black accent-3">
+                                            <h5 style={{width:"50%"}}>Please Select a Catering Service</h5>
+                                            <Link classnames="btn waves-effect waves-light hoverable green accent-3" to="/selectcateringservice" style={{ width:"15%", borderRadius: "3px", letterSpacing: "1.5px"}}className="btn btn-small waves-effect waves-light hoverable blue accent-3">
                                                 <i className="zmdi zmdi-view-dashboard"></i> Catering Services
                                             </Link>
                                         </div>
@@ -200,8 +204,8 @@ class createEvent extends Component {
                                         this.state.even.tselected == 0
                                     )?(
                                         <div style={{display:"flex", flexDirection:"row"}}>
-                                            <h6>Please Select a Tent and Decor provider @</h6>
-                                            <Link classnames="btn waves-effect waves-light hoverable green accent-3" to="/selecttentanddecor" style={{ width:"100%", borderRadius: "3px", letterSpacing: "1.5px"}}className="btn btn-large waves-effect waves-light hoverable black accent-3">
+                                            <h5 style={{width:"50%"}}>Please Select a Tent and Decor provider</h5>
+                                            <Link classnames="btn waves-effect waves-light hoverable green accent-3" to="/selecttentanddecor" style={{ width:"15%", borderRadius: "3px", letterSpacing: "1.5px"}}className="btn btn-small waves-effect waves-light hoverable blue accent-3">
                                                 <i className="zmdi zmdi-view-dashboard"></i> Tent and Decor Providers
                                             </Link>
                                         </div>
@@ -214,8 +218,8 @@ class createEvent extends Component {
                                         this.state.even.pselected == 0
                                     )?(
                                         <div style={{display:"flex", flexDirection:"row"}}>
-                                            <h6>Please Select Photographer @</h6>
-                                            <Link classnames="btn waves-effect waves-light hoverable green accent-3" to="/selectphotographer" style={{ width:"100%", borderRadius: "3px", letterSpacing: "1.5px"}}className="btn btn-large waves-effect waves-light hoverable black accent-3">
+                                            <h5 style={{width:"50%"}}>Please Select Photographer</h5>
+                                            <Link classnames="btn waves-effect waves-light hoverable green accent-3" to="/selectphotographer" style={{ width:"15%", borderRadius: "3px", letterSpacing: "1.5px"}}className="btn btn-small waves-effect waves-light hoverable blue accent-3">
                                                 <i className="zmdi zmdi-view-dashboard"></i> Photographers
                                             </Link>
                                         </div>
@@ -228,8 +232,8 @@ class createEvent extends Component {
                                         this.state.even.dselected == 0
                                     )?(
                                         <div style={{display:"flex", flexDirection:"row"}}>
-                                            <h6>Please Select a DJ @</h6>
-                                            <Link classnames="btn waves-effect waves-light hoverable green accent-3" to="/selectdj" style={{ width:"100%", borderRadius: "3px", letterSpacing: "1.5px"}}className="btn btn-large waves-effect waves-light hoverable black accent-3">
+                                            <h5 style={{width:"50%"}}>Please Select a DJ</h5>
+                                            <Link classnames="btn waves-effect waves-light hoverable green accent-3" to="/selectdj" style={{ width:"15%", borderRadius: "3px", letterSpacing: "1.5px"}}className="btn btn-small waves-effect waves-light hoverable blue accent-3">
                                                 <i className="zmdi zmdi-view-dashboard"></i> DJs Available
                                             </Link>
                                         </div>
