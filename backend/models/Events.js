@@ -7,6 +7,11 @@ const Events = new Schema({
         type:String,
         required: true
     },
+    name: {
+        type: String,
+        required: true
+
+    },
     ongoing: {
         type: Number,
         default: 1,
