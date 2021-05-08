@@ -18,6 +18,17 @@ export const registerUser = (userData, history) => dispatch => {
       })
     );
 };
+export const editProfile = (userData, history) => dispatch => {
+    axios
+      .post("/serviceProvider/profile/edit", userData)
+      .then(res => history.push("/spdashboard")) // re-direct to login on successful register
+      .catch(err =>
+        dispatch({
+          type: GET_ERRORS,
+          payload: err.response.data
+        })
+      );
+  };
 // Login - get user token
 export const loginUser = userData => dispatch => {
   axios

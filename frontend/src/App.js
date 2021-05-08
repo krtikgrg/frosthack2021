@@ -11,7 +11,7 @@ import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import PrivateRoute from "./components/private-route/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
-
+import Profile from "./components/serviceproviders/profile";
 import SpDashboard from "./components/serviceproviders/dashboard";
 
 // Check for token to keep user logged in
@@ -45,6 +45,7 @@ class App extends Component {
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
               <PrivateRoute exact path="/spdashboard" component={SpDashboard} />
+              <PrivateRoute exact path="/profile" component={Profile} />
             </Switch>
           </div>
         </Router>
