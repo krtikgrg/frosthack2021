@@ -18,6 +18,7 @@ class editProfile extends Component {
             price: "",
             description: "",
             id : "",
+            phone: "",
             errors: {}
         };
     }
@@ -46,6 +47,7 @@ class editProfile extends Component {
             this.setState({ email: res.data[0].email })
             this.setState({ price: res.data[0].price })
             this.setState({ description: res.data[0].description })
+            this.setState({ phone: res.data[0].phone })
             this.setState({ id:this.props.auth.user.id })
         })
     }
@@ -111,6 +113,23 @@ class editProfile extends Component {
                                                     type="text"
                                                     className={classnames("form__input", {
                                                         invalid: errors.name
+                                                    })}
+                                                />
+                                                
+                                            </div>
+                                            <div>
+                                                <label htmlFor="name">Phone Number</label>
+                                                <span className="red-text">
+                                                    {errors.phone}
+                                                </span>
+                                                <input
+                                                    onChange={this.onChange}
+                                                    value={this.state.phone}
+                                                    error={errors.phone}
+                                                    id="phone"
+                                                    type="text"
+                                                    className={classnames("form__input", {
+                                                        invalid: errors.phone
                                                     })}
                                                 />
                                                 
