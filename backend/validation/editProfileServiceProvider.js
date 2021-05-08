@@ -7,10 +7,16 @@ module.exports = function validateRegisterInput(data){
     data.type = !isEmpty(data.type) ? data.type: "";
     data.description = !isEmpty(data.description) ? data.description: "";
     data.price = !isEmpty(data.price) ? data.price: "";
+    data.phone = !isEmpty(data.phone) ? data.phone: "";
 
     if(validator.isEmpty(data.name)){
         errors.name = "Name field can not be empty";
     }
+
+    if(!validator.isLength(data.phone,{min:10 , max: 10})){
+        errors.phone = "phone should be 10 digits long";
+    }
+    
 
     if( data.type !== "u"){
         if(validator.isEmpty(data.description)){

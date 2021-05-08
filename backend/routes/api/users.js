@@ -20,7 +20,7 @@ router.post("/register", (req, res) => {
         if(user){
             return res.status(400).json({email: "Email already exists"});
         }else{
-            const newUser = new User({ name: req.body.name , email: req.body.email , password: req.body.password, type: req.body.type , description: req.body.description, price: req.body.price });
+            const newUser = new User({ name: req.body.name , email: req.body.email , password: req.body.password, type: req.body.type , description: req.body.description, price: req.body.price ,phone: req.body.phone});
             bcrypt.genSalt(10, (err,salt) => {
                 bcrypt.hash(newUser.password, salt, (err, hash)=>{
                     if(err) throw err;
@@ -56,6 +56,7 @@ router.post("/login", (req,res) => {
                     email: user.email,
                     type: user.type,
                     description: user.description,
+                    phone: user.phone,
                     price: user.price
                 };
                 jwt.sign( payload,keys.secretOrKey,{ expiresIn: 31556926 },(err, token) => {
