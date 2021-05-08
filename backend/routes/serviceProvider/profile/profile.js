@@ -9,13 +9,7 @@ const User = require("../../../models/User");
 // const User = require("../../../models/User");
 const isEmpty = require("is-empty");
 
-router.post("/",(req,res)=>{
-    console.log(req.body);
-    User.find({type: req.body.type}).then(user => {
-        res.json(user);
-        console.log(res);
-    });
-});
+
 
 router.post("/get",(req,res)=>{
     // console.log(req.body);
